@@ -9,7 +9,7 @@ class ContactsListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Contacts'),),
       body: const Column(children: [
-        Text('Contact test'),
+        Text('Contact test', style: TextStyle(fontSize: 20),),
       ],),
     );
   }
