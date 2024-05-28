@@ -8,6 +8,9 @@ class ContactsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Contacts'),),
+      body: const Column(children: [
+        Text('Contact test'),
+      ],),
     );
   }
 }
