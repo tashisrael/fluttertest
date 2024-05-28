@@ -10,11 +10,19 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      title: 'Contacts',
+      home: ContactsListPage(),
+    );
+  }
+}
+
+class ContactsListPage extends StatelessWidget {
+  const ContactsListPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Contacts'),),
     );
   }
 }
