@@ -9,15 +9,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'Contacts',
-      home: ContactsListPage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          color: Colors.blue,
+        ),
+      ),
+      home: const ContactsListPage(),
     );
   }
 }
 
 class ContactsListPage extends StatelessWidget {
   const ContactsListPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
