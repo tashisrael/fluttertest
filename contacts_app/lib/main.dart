@@ -1,3 +1,4 @@
+import 'package:contacts_app/ui/contacts_list/contacts_list_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,14 +23,3 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class ContactsListPage extends StatelessWidget {
-  const ContactsListPage({super.key});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Contacts'),),
-    );
-  }
-}
