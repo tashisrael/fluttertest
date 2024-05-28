@@ -11,7 +11,7 @@ class ContactsListPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: 30,
         itemBuilder: (context, index) {
-          return const Text('Contact test', style: TextStyle(fontSize: 30),);
+          return const Text('Contacts test', style: TextStyle(fontSize: 30),);
         },
       ),
     );
