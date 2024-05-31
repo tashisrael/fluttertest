@@ -11,14 +11,21 @@ class ContactsListPage extends StatefulWidget {
 }
 
 class _ContactsListPageState extends State<ContactsListPage> {
-  final List<Contact> _contacts = List.generate(50, (index) {
-    return Contact(
-      name: faker.person.firstName(), 
-      email: faker.internet.freeEmail(), 
-      phoneNumber: faker.randomGenerator.integer(1000000).toString(),);
-  },);
+  late List<Contact> _contacts;
 
- // const ContactsListPage({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _contacts = List.generate(50, (index) {
+      return Contact(
+        name: faker.person.firstName(), 
+        email: faker.internet.freeEmail(), 
+        phoneNumber: faker.randomGenerator.integer(1000000).toString(),
+      );
+    },);
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
