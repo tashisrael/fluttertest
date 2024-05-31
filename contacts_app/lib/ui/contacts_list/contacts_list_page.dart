@@ -2,7 +2,15 @@ import 'package:contacts_app/data/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
 
-class ContactsListPage extends StatelessWidget {
+class ContactsListPage extends StatefulWidget {
+
+  const ContactsListPage({super.key});
+
+  @override
+  State<ContactsListPage> createState() => _ContactsListPageState();
+}
+
+class _ContactsListPageState extends State<ContactsListPage> {
   final List<Contact> _contacts = List.generate(50, (index) {
     return Contact(
       name: faker.person.firstName(), 
@@ -10,7 +18,6 @@ class ContactsListPage extends StatelessWidget {
       phoneNumber: faker.randomGenerator.integer(1000000).toString(),);
   },);
 
-  ContactsListPage({super.key});
  // const ContactsListPage({super.key});
   @override
   Widget build(BuildContext context) {
