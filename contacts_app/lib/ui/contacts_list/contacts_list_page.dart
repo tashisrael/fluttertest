@@ -23,9 +23,9 @@ class _ContactsListPageState extends State<ContactsListPage> {
         phoneNumber: faker.randomGenerator.integer(1000000).toString(),
       );
     },);
-    
   }
 
+//build runs when the state changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +41,21 @@ class _ContactsListPageState extends State<ContactsListPage> {
                 _contacts[index].isFavorite ? Icons.star : Icons.star_border,
                 color: _contacts[index].isFavorite ? Colors.amber : Colors.grey,
               ), onPressed: () { 
-                setState(() {
-                  _contacts[index].isFavorite = !_contacts[index].isFavorite;
-                }); 
-                //print(_contacts[index].isFavorite);
-               },
+                  setState(() {
+                    _contacts[index].isFavorite = !_contacts[index].isFavorite;
+                    _contacts.sort((a, b) {
+                      if (a.isFavorite) {
+                        //contactOne wil be before contactTwo
+                        return -1;
+                      }else if (b.isFavorite) {
+                        //contactOne wil be after contactTwo
+                        return 1;
+                      }else {
+                        return 0;
+                      }
+                    });
+                  }); 
+                },
             ),
           );
         },
