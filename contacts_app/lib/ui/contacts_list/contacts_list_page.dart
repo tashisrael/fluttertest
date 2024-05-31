@@ -36,6 +36,7 @@ class _ContactsListPageState extends State<ContactsListPage> {
           return ListTile(
             title: Text(_contacts[index].name),
             subtitle: Text(_contacts[index].email),
+            trailing: const IconButton(icon: Icon(Icons.star_border),),
           );
         },
       ),
