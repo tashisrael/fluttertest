@@ -9,17 +9,20 @@ class ContactsListPage extends StatelessWidget {
       email: faker.internet.freeEmail(), 
       phoneNumber: faker.randomGenerator.integer(1000000).toString(),);
   },);
+
+  ContactsListPage({super.key});
  // const ContactsListPage({super.key});
   @override
   Widget build(BuildContext context) {
-    final faker = Faker();
     return Scaffold(
       appBar: AppBar(title: const Text('Contacts'),),
       body: ListView.builder(
-        itemCount: 30,
+        itemCount: _contacts.length,
         itemBuilder: (context, index) {
-          return Text(faker.animal.name(), 
-          style: const TextStyle(fontSize: 30),);
+          return ListTile(
+            title: Text(_contacts[index].name),
+            subtitle: Text(_contacts[index].email),
+          );
         },
       ),
     );

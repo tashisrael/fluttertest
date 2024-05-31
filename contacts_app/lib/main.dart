@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
           color: Colors.blue,
         ),
       ),
-      home: const ContactsListPage(),
+      home: ContactsListPage(),
     );
   }
 }
