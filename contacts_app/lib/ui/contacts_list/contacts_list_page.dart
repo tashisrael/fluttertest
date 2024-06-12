@@ -33,33 +33,11 @@ class _ContactsListPageState extends State<ContactsListPage> {
       body: ListView.builder(
         itemCount: _contacts.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_contacts[index].name),
-            subtitle: Text(_contacts[index].email),
-            trailing: IconButton(
-              icon: Icon(
-                _contacts[index].isFavorite ? Icons.star : Icons.star_border,
-                color: _contacts[index].isFavorite ? Colors.amber : Colors.grey,
-              ), onPressed: () { 
-                  setState(() {
-                    _contacts[index].isFavorite = !_contacts[index].isFavorite;
-                    _contacts.sort((a, b) {
-                      if (a.isFavorite) {
-                        //contactOne wil be before contactTwo
-                        return -1;
-                      }else if (b.isFavorite) {
-                        //contactOne wil be after contactTwo
-                        return 1;
-                      }else {
-                        return 0;
-                      }
-                    });
-                  }); 
-                },
-            ),
-          );
+          return ContactTile(index);
         },
       ),
     );
   }
+
+  
 }
