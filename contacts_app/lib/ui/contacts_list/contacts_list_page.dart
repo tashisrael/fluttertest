@@ -1,4 +1,5 @@
 import 'package:contacts_app/data/contact.dart';
+import 'package:contacts_app/ui/contacts_list/widget/contact_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
 
@@ -33,7 +34,22 @@ class _ContactsListPageState extends State<ContactsListPage> {
       body: ListView.builder(
         itemCount: _contacts.length,
         itemBuilder: (context, index) {
-          return ContactTile(index);
+          return ContactTile(contact: _contacts[index], onFavoritePressed: () {
+            setState(() {
+                  _contacts[index].isFavorite = !_contacts[index].isFavorite;
+                  _contacts.sort((a, b) {
+                    if (a.isFavorite) {
+                      //contactOne wil be before contactTwo
+                      return -1;
+                    }else if (b.isFavorite) {
+                      //contactOne wil be after contactTwo
+                      return 1;
+                    }else {
+                      return 0;
+                    }
+                  });
+                }); 
+          },);
         },
       ),
     );
