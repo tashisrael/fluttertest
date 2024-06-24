@@ -13,6 +13,20 @@ class ContactsModel extends Model {
     },);
   
   List<Contact> get contacts => _contacts;
+  //OR List<Contact> get contacts {return _contacts;}
 
-  //List<Contact> get contacts {return _contacts};
+  void changeFavoriteStatus(int index){
+    _contacts[index].isFavorite = !_contacts[index].isFavorite;
+      _contacts.sort((a, b) {
+        if (a.isFavorite) {
+          //contactOne wil be before contactTwo
+          return -1;
+        }else if (b.isFavorite) {
+          //contactOne wil be after contactTwo
+          return 1;
+        }else {
+          return 0;
+        }
+      }); 
+}
 }
