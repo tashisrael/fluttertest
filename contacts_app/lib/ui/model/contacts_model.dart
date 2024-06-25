@@ -17,17 +17,21 @@ class ContactsModel extends Model {
 
   void changeFavoriteStatus(int index){
     _contacts[index].isFavorite = !_contacts[index].isFavorite;
-      _contacts.sort((a, b) {
-        if (a.isFavorite) {
-          //contactOne wil be before contactTwo
-          return -1;
-        }else if (b.isFavorite) {
-          //contactOne wil be after contactTwo
-          return 1;
-        }else {
-          return 0;
-        }
-      }); 
+      _sortContacts(); 
       notifyListeners();
 }
+
+  void _sortContacts() {
+    _contacts.sort((a, b) {
+      if (a.isFavorite) {
+        //contactOne wil be before contactTwo
+        return -1;
+      }else if (b.isFavorite) {
+        //contactOne wil be after contactTwo
+        return 1;
+      }else {
+        return 0;
+      }
+    }); 
+  }
 }
