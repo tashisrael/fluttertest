@@ -23,15 +23,31 @@ class ContactsModel extends Model {
 
   void _sortContacts() {
     _contacts.sort((a, b) {
-      if (a.isFavorite) {
-        //contactOne wil be before contactTwo
-        return -1;
-      }else if (b.isFavorite) {
-        //contactOne wil be after contactTwo
-        return 1;
-      }else {
-        return 0;
+      int comparisonResult;
+
+      comparisonResult = _compareBasedOnFavoriteStatus(a, b);
+
+      if (comparisonResult == 0) {
+        comparisonResult = _compareAlphabetically(a, b);
       }
+
+      return comparisonResult;
     }); 
+  }
+
+  int _compareBasedOnFavoriteStatus(Contact a, Contact b) {
+    if (a.isFavorite) {
+      //contactOne wil be before contactTwo
+      return -1;
+    }else if (b.isFavorite) {
+      //contactOne wil be after contactTwo
+      return 1;
+    }else {
+      return 0;
+    }
+  }
+
+  int _compareAlphabetically(Contact a, Contact b) {
+    return a.name.compareTo(b.name);
   }
 }
