@@ -14,8 +14,7 @@ class ContactTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<ContactsModel>(
-      builder: (context, child, model) {
+    final model = ScopedModel.of<ContactsModel>(context);
         final displayedContact = model.contacts[contactIndex];
         return ListTile(
         title: Text(displayedContact.name),
@@ -30,7 +29,5 @@ class ContactTile extends StatelessWidget {
           },
         ),
       );
-      } 
-    );
-  }
+      }
 }
