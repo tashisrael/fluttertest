@@ -20,30 +20,53 @@ class _ContactFormState extends State<ContactForm> {
       key: _formKey,
       child: ListView(
         children: [
+          const SizedBox(height: 10),
           TextFormField(
             onSaved: (value) => _name = value ?? '',
             decoration: const InputDecoration(
-              labelText: 'Name'
+              labelText: 'Name',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
             ),
           ),
+          const SizedBox(height: 10),
           TextFormField(
             onSaved: (value) => _email = value ?? '',
             decoration: const InputDecoration(
-              labelText: 'Email'
+              labelText: 'Email',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
             ),
           ),
+          const SizedBox(height: 10),
           TextFormField(
             onSaved: (value) => _phoneNumber = value ?? '',
             decoration: const InputDecoration(
-              labelText: 'Phone Number'
+              labelText: 'Phone Number',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
             ),
           ),
+          const SizedBox(height: 10),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue, // Change button color here
+              foregroundColor: Colors.white, // Change text color here
+            ),
             onPressed: () {
               _formKey.currentState?.save();
               print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
             },
-            child: const Text('Submit'),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Save Contact'),
+                Icon(Icons.person, size: 18,),
+              ]
+            )
           ),
         ],
       ),
