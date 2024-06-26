@@ -16,7 +16,9 @@ class ContactsModel extends Model {
   //OR List<Contact> get contacts {return _contacts;}
 
   void addContact(Contact contact) {
+    print(_contacts.length);
     _contacts.add(contact);
+    print(_contacts.length);
     notifyListeners();
   }
 
