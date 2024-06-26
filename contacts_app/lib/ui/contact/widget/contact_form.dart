@@ -38,13 +38,22 @@ class _ContactFormState extends State<ContactForm> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            onSaved: (value) => _email = value ?? '',
             decoration: const InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              }
+              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                return 'Please enter a valid email address';
+              }
+              return null;
+            },
+            onSaved: (value) => _email = value ?? '',
           ),
           const SizedBox(height: 10),
           TextFormField(
