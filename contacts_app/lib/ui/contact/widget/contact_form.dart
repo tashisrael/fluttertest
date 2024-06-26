@@ -57,13 +57,22 @@ class _ContactFormState extends State<ContactForm> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            onSaved: (value) => _phoneNumber = value ?? '',
             decoration: const InputDecoration(
               labelText: 'Phone Number',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your Phone Number';
+              }
+              if (!RegExp(r'^\+?[0-9]{7,15}$').hasMatch(value)) {
+                return 'Please enter a valid Phone Number';
+              }
+              return null;
+            },
+            onSaved: (value) => _phoneNumber = value ?? '',
           ),
           const SizedBox(height: 10),
           ElevatedButton(
