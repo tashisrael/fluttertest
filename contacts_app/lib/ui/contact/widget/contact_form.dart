@@ -22,13 +22,19 @@ class _ContactFormState extends State<ContactForm> {
         children: [
           const SizedBox(height: 10),
           TextFormField(
-            onSaved: (value) => _name = value ?? '',
             decoration: const InputDecoration(
               labelText: 'Name',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your name';
+              }
+              return null;
+            },
+            onSaved: (value) => _name = value ?? '',
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -57,8 +63,10 @@ class _ContactFormState extends State<ContactForm> {
               foregroundColor: Colors.white, // Change text color here
             ),
             onPressed: () {
-              _formKey.currentState?.save();
-              print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
+              if (_formKey.currentState?.validate() ?? false) {
+                _formKey.currentState?.save();
+                print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
+              }
             },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
