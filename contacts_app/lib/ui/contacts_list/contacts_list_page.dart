@@ -1,3 +1,4 @@
+import 'package:contacts_app/ui/contact/contact_create_page.dart';
 import 'package:contacts_app/ui/contacts_list/widget/contact_tile.dart';
 import 'package:contacts_app/ui/model/contacts_model.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,13 @@ class _ContactsListPageState extends State<ContactsListPage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.person_add),
         onPressed: () {
-
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const ContactCreatePage()),
+          // );
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ContactCreatePage()),
+          );
         },
       ),
     );

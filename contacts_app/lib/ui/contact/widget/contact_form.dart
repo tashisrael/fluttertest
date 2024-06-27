@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ContactForm extends StatefulWidget {
-  //const ContactForm({super.key});
+  const ContactForm({super.key});
 
   @override
   State<ContactForm> createState() => _ContactFormState();
