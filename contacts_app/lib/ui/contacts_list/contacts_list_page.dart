@@ -30,6 +30,12 @@ class _ContactsListPageState extends State<ContactsListPage> {
         );
         }
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.person_add),
+        onPressed: () {
+
+        },
+      ),
     );
   }
 
