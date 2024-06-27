@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ContactForm extends StatefulWidget {
-  const ContactForm({super.key});
+  //const ContactForm({super.key});
+  final Contact editedContact;
+  final int editedContactIndex;
+
+  const ContactForm({
+    super.key,
+    required this.editedContact,
+    required this.editedContactIndex,
+  });
 
   @override
   State<ContactForm> createState() => _ContactFormState();

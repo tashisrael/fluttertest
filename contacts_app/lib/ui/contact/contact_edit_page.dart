@@ -7,10 +7,10 @@ class ContactEditPage extends StatelessWidget {
   final int editedContactIndex;
 
   const ContactEditPage({
-    required Key key,
+    super.key,
     required this.editedContact,
     required this.editedContactIndex,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,10 @@ class ContactEditPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Edit'),
         ),
-      body: const ContactForm(),
+      body: ContactForm(
+        editedContact: editedContact,
+        editedContactIndex: editedContactIndex,
+      ),
       );
   }
 }
