@@ -103,6 +103,7 @@ class _ContactFormState extends State<ContactForm> {
       final newContact = Contact(name: _name, email: _email, phoneNumber: _phoneNumber);
       ScopedModel.of<ContactsModel>(context).addContact(newContact);
       //print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
+      Navigator.of(context).pop();
     }
   }
 }
