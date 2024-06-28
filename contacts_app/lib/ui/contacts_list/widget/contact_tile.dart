@@ -26,7 +26,7 @@ class ContactTile extends StatelessWidget {
         children: [
           SlidableAction(
             onPressed: (context) {
-              //model.deleteContact(contactIndex);
+              model.deleteContact(contactIndex);
             },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
