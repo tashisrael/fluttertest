@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ContactForm extends StatefulWidget {
-  //const ContactForm({super.key});
-  final Contact editedContact;
-  final int editedContactIndex;
+  final Contact? editedContact;
+  final int? editedContactIndex;
 
   const ContactForm({
     super.key,
-    required this.editedContact,
-    required this.editedContactIndex,
+    this.editedContact,
+    this.editedContactIndex,
   });
 
   @override
@@ -21,17 +20,26 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _name = '';
-  String _email = '';
-  String _phoneNumber = '';
+  late String _name;
+  late String _email;
+  late String _phoneNumber;
 
   bool get isEditMode => widget.editedContact != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _name = widget.editedContact?.name ?? '';
+    _email = widget.editedContact?.email ?? '';
+    _phoneNumber = widget.editedContact?.phoneNumber ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: ListView(
+        padding: const EdgeInsets.all(16.0),
         children: [
           const SizedBox(height: 10),
           TextFormField(
@@ -48,7 +56,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _name = value ?? '',
-            initialValue: widget.editedContact.name,
+            initialValue: _name,
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -68,7 +76,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _email = value ?? '',
-            initialValue: widget.editedContact.email,
+            initialValue: _email,
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -88,7 +96,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _phoneNumber = value ?? '',
-            initialValue: widget.editedContact.phoneNumber,
+            initialValue: _phoneNumber,
           ),
           const SizedBox(height: 10),
           ElevatedButton(
@@ -101,9 +109,9 @@ class _ContactFormState extends State<ContactForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Save Contact'),
-                Icon(Icons.person, size: 18,),
-              ]
-            )
+                Icon(Icons.person, size: 18),
+              ],
+            ),
           ),
         ],
       ),
@@ -114,17 +122,18 @@ class _ContactFormState extends State<ContactForm> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       final newContact = Contact(
-        name: _name, 
-        email: _email, 
+        name: _name,
+        email: _email,
         phoneNumber: _phoneNumber,
         isFavorite: widget.editedContact?.isFavorite ?? false,
       );
-      if(isEditMode) {
-        ScopedModel.of<ContactsModel>(context).updateContact(newContact, widget.editedContactIndex);
-      } else{
+
+      if (isEditMode) {
+        ScopedModel.of<ContactsModel>(context).updateContact(newContact, widget.editedContactIndex!);
+      } else {
         ScopedModel.of<ContactsModel>(context).addContact(newContact);
       }
-      //print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
+
       Navigator.of(context).pop();
     }
   }
