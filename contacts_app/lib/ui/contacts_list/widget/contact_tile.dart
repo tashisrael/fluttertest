@@ -27,6 +27,11 @@ class ContactTile extends StatelessWidget {
           SlidableAction(
             onPressed: (context) {
               model.deleteContact(contactIndex);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Contact deleted successfully'),
+                ),
+              );
             },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
