@@ -18,8 +18,22 @@ class ContactTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = ScopedModel.of<ContactsModel>(context);
         final displayedContact = model.contacts[contactIndex];
-        return Slidable
-        (
+        return Slidable(
+          key: ValueKey(contactIndex),
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) {
+              //model.deleteContact(contactIndex);
+            },
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Delete',
+          ),
+        ],
+      ),
           child: ListTile(
           title: Text(displayedContact.name),
           subtitle: Text(displayedContact.email),
