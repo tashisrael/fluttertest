@@ -46,6 +46,11 @@ class ContactTile extends StatelessWidget {
 
   ListTile _buildContent(Contact displayedContact, ContactsModel model, BuildContext context) {
     return ListTile(
+        leading: CircleAvatar(
+          child: Text(
+            displayedContact.name[0]
+          ),
+        ),
         title: Text(displayedContact.name),
         subtitle: Text(displayedContact.email),
         trailing: IconButton(
