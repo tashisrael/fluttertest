@@ -46,6 +46,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _name = value ?? '',
+            initialValue: widget.editedContact.name,
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -65,6 +66,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _email = value ?? '',
+            initialValue: widget.editedContact.email,
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -84,6 +86,7 @@ class _ContactFormState extends State<ContactForm> {
               return null;
             },
             onSaved: (value) => _phoneNumber = value ?? '',
+            initialValue: widget.editedContact.phoneNumber,
           ),
           const SizedBox(height: 10),
           ElevatedButton(

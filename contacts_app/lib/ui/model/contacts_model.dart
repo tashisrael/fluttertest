@@ -4,7 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 class ContactsModel extends Model {
   //underscore acts like a private access modifier
-  final List<Contact> _contacts = List.generate(50, (index) {
+  final List<Contact> _contacts = List.generate(5, (index) {
       return Contact(
         name: faker.person.firstName(), 
         email: faker.internet.freeEmail(), 
