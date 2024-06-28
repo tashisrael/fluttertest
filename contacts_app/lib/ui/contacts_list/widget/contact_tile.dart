@@ -1,3 +1,4 @@
+import 'package:contacts_app/data/contact.dart';
 import 'package:contacts_app/ui/contact/contact_edit_page.dart';
 import 'package:contacts_app/ui/model/contacts_model.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class ContactTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = ScopedModel.of<ContactsModel>(context);
+    final model = ScopedModel.of<ContactsModel>(context, rebuildOnChange: true);
         final displayedContact = model.contacts[contactIndex];
         return Slidable(
           key: ValueKey(contactIndex),
@@ -34,25 +35,29 @@ class ContactTile extends StatelessWidget {
           ),
         ],
       ),
-          child: ListTile(
-          title: Text(displayedContact.name),
-          subtitle: Text(displayedContact.email),
-          trailing: IconButton(
-            icon: Icon(
-              displayedContact.isFavorite ? Icons.star : Icons.star_border,
-              color: displayedContact.isFavorite ? Colors.amber : Colors.grey,
-            ),
-            onPressed: () {
-              model.changeFavoriteStatus(contactIndex);
-            },
-          ),
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => ContactEditPage(editedContact: displayedContact, 
-              editedContactIndex: contactIndex),
-              ));
-          },
-          ),
+          child: _buildContent(displayedContact, model, context),
         );
       }
+
+  ListTile _buildContent(Contact displayedContact, ContactsModel model, BuildContext context) {
+    return ListTile(
+        title: Text(displayedContact.name),
+        subtitle: Text(displayedContact.email),
+        trailing: IconButton(
+          icon: Icon(
+            displayedContact.isFavorite ? Icons.star : Icons.star_border,
+            color: displayedContact.isFavorite ? Colors.amber : Colors.grey,
+          ),
+          onPressed: () {
+            model.changeFavoriteStatus(contactIndex);
+          },
+        ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => ContactEditPage(editedContact: displayedContact, 
+            editedContactIndex: contactIndex),
+            ));
+        },
+        );
+  }
 }
