@@ -27,6 +27,11 @@ class ContactsModel extends Model {
     notifyListeners();
   }
 
+  void deleteContact(int index) {
+    _contacts.removeAt(index);
+    notifyListeners();
+  }
+
   void changeFavoriteStatus(int index){
     _contacts[index].isFavorite = !_contacts[index].isFavorite;
       _sortContacts(); 
