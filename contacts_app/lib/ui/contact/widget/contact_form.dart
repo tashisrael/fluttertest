@@ -41,6 +41,7 @@ class _ContactFormState extends State<ContactForm> {
       child: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildContactPicture(),
           const SizedBox(height: 10),
           TextFormField(
             decoration: const InputDecoration(
@@ -114,6 +115,17 @@ class _ContactFormState extends State<ContactForm> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildContactPicture() {
+    String displayText = _name.isNotEmpty ? _name[0] : '?';
+    return CircleAvatar(
+      radius: 50,
+      child: Text(
+        displayText,
+        style: TextStyle(fontSize: 40),
       ),
     );
   }
