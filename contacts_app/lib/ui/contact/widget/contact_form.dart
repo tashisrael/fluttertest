@@ -25,6 +25,8 @@ class _ContactFormState extends State<ContactForm> {
   String _email = '';
   String _phoneNumber = '';
 
+  bool get isEditMode => widget.editedContact != null;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -111,8 +113,17 @@ class _ContactFormState extends State<ContactForm> {
   void _onSaveButtonPressed() {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      final newContact = Contact(name: _name, email: _email, phoneNumber: _phoneNumber);
-      ScopedModel.of<ContactsModel>(context).addContact(newContact);
+      final newContact = Contact(
+        name: _name, 
+        email: _email, 
+        phoneNumber: _phoneNumber,
+        isFavorite: widget.editedContact?.isFavorite ?? false,
+      );
+      if(isEditMode) {
+        ScopedModel.of<ContactsModel>(context).updateContact(newContact, widget.editedContactIndex);
+      } else{
+        ScopedModel.of<ContactsModel>(context).addContact(newContact);
+      }
       //print('Name: $_name, Email: $_email, Phone Number: $_phoneNumber');
       Navigator.of(context).pop();
     }
