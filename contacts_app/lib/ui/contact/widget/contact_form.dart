@@ -126,11 +126,20 @@ class _ContactFormState extends State<ContactForm> {
     String displayText = _name.isNotEmpty ? _name[0] : '?';
     return CircleAvatar(
       radius: radius,
-      child: Text(
-        displayText,
-        style: TextStyle(fontSize: radius),
-      ),
+      child: _buildCircleAvatarContent(displayText, radius),
     );
+  }
+
+  Widget _buildCircleAvatarContent(String displayText, double radius) {
+    if(isEditMode){
+      return Text(
+      displayText,
+      style: TextStyle(fontSize: radius),
+    );
+    }
+    else {
+      return Icon(Icons.person, size: radius,);
+    }
   }
 
   void _onSaveButtonPressed() {
