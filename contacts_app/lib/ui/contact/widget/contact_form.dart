@@ -124,9 +124,13 @@ class _ContactFormState extends State<ContactForm> {
     final double radius = screenWidth * 0.2; // Adjust the factor as needed
 
     String displayText = _name.isNotEmpty ? _name[0] : '?';
-    return CircleAvatar(
-      radius: radius,
-      child: _buildCircleAvatarContent(displayText, radius),
+    return Hero(
+      tag: widget.editedContact.hashCode,
+      // tag: widget.editedContact?.hashCode,
+      child: CircleAvatar(
+        radius: radius,
+        child: _buildCircleAvatarContent(displayText, radius),
+      ),
     );
   }
 
