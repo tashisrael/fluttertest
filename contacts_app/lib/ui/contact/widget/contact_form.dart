@@ -120,12 +120,15 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   Widget _buildContactPicture() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final double radius = screenWidth * 0.2; // Adjust the factor as needed
+
     String displayText = _name.isNotEmpty ? _name[0] : '?';
     return CircleAvatar(
-      radius: 50,
+      radius: radius,
       child: Text(
         displayText,
-        style: TextStyle(fontSize: 40),
+        style: TextStyle(fontSize: radius),
       ),
     );
   }
