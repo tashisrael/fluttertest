@@ -125,7 +125,7 @@ class _ContactFormState extends State<ContactForm> {
 
     String displayText = _name.isNotEmpty ? _name[0] : '?';
     return Hero(
-      tag: widget.editedContact.hashCode,
+      tag: widget.editedContact?.hashCode ?? 0,
       // tag: widget.editedContact?.hashCode,
       child: CircleAvatar(
         radius: radius,
