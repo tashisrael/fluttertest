@@ -46,11 +46,7 @@ class ContactTile extends StatelessWidget {
 
   ListTile _buildContent(Contact displayedContact, ContactsModel model, BuildContext context) {
     return ListTile(
-        leading: CircleAvatar(
-          child: Text(
-            displayedContact.name[0]
-          ),
-        ),
+        leading: _buildCircleAvatar(displayedContact),
         title: Text(displayedContact.name),
         subtitle: Text(displayedContact.email),
         trailing: IconButton(
@@ -69,5 +65,16 @@ class ContactTile extends StatelessWidget {
             ));
         },
         );
+  }
+
+  Hero _buildCircleAvatar(Contact displayedContact) {
+    return Hero(
+      tag: displayedContact.hashCode,
+        child: CircleAvatar(
+          child: Text(
+            displayedContact.name[0]
+          ),
+        ),
+      );
   }
 }
