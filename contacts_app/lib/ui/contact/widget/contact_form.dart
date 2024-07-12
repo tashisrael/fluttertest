@@ -127,9 +127,11 @@ class _ContactFormState extends State<ContactForm> {
     return Hero(
       tag: widget.editedContact?.hashCode ?? 0,
       // tag: widget.editedContact?.hashCode,
-      child: CircleAvatar(
-        radius: radius,
-        child: _buildCircleAvatarContent(displayText, radius),
+      child: GestureDetector(
+        child: CircleAvatar(
+          radius: radius,
+          child: _buildCircleAvatarContent(displayText, radius),
+        ),
       ),
     );
   }
