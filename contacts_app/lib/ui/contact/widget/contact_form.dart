@@ -150,8 +150,16 @@ class _ContactFormState extends State<ContactForm> {
     }
   }
 
-  void _onContactPictureTapped(){
-    final imageFile = ImagePicker.pickImage(source: ImageSource.gallery);
+  void _onContactPictureTapped() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    print(pickedFile?.path);
+
+    // if (pickedFile != null) {
+    //   setState(() { 
+    //     _photo = pickedFile.path;
+    //   });
+    // }
   }
 
   void _onSaveButtonPressed() {
