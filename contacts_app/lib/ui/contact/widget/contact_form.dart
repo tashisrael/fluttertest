@@ -1,6 +1,7 @@
 import 'package:contacts_app/data/contact.dart';
 import 'package:contacts_app/ui/model/contacts_model.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ContactForm extends StatefulWidget {
@@ -128,6 +129,7 @@ class _ContactFormState extends State<ContactForm> {
       tag: widget.editedContact?.hashCode ?? 0,
       // tag: widget.editedContact?.hashCode,
       child: GestureDetector(
+        onTap: _onContactPictureTapped,
         child: CircleAvatar(
           radius: radius,
           child: _buildCircleAvatarContent(displayText, radius),
@@ -146,6 +148,10 @@ class _ContactFormState extends State<ContactForm> {
     else {
       return Icon(Icons.person, size: radius,);
     }
+  }
+
+  void _onContactPictureTapped(){
+    final imageFile = ImagePicker.pickImage(source: ImageSource.gallery);
   }
 
   void _onSaveButtonPressed() {
