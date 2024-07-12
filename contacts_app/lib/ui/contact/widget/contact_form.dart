@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:contacts_app/data/contact.dart';
 import 'package:contacts_app/ui/model/contacts_model.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _ContactFormState extends State<ContactForm> {
   late String _name;
   late String _email;
   late String _phoneNumber;
+  late File _contactImageFile;
 
   bool get isEditMode => widget.editedContact != null;
 
@@ -140,10 +142,15 @@ class _ContactFormState extends State<ContactForm> {
 
   Widget _buildCircleAvatarContent(String displayText, double radius) {
     if(isEditMode){
-      return Text(
-      displayText,
-      style: TextStyle(fontSize: radius),
-    );
+      if(_contactImageFile == null) {
+          return Text(
+          displayText,
+          style: TextStyle(fontSize: radius),
+        );
+      }
+      else {
+        return Image.file(_contactImageFile);
+      }
     }
     else {
       return Icon(Icons.person, size: radius,);
@@ -153,7 +160,9 @@ class _ContactFormState extends State<ContactForm> {
   void _onContactPictureTapped() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    print(pickedFile?.path);
+    setState(() {
+      _contactImageFile = pickedFile as File;
+    });
 
     // if (pickedFile != null) {
     //   setState(() { 
