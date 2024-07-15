@@ -25,7 +25,7 @@ class _ContactFormState extends State<ContactForm> {
   late String _name;
   late String _email;
   late String _phoneNumber;
-  late File _contactImageFile;
+  File? _contactImageFile;
 
   bool get isEditMode => widget.editedContact != null;
 
@@ -123,52 +123,54 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   Widget _buildContactPicture() {
-    final screenWidth = MediaQuery.of(context).size.width;
+     final screenWidth = MediaQuery.of(context).size.width;
     final double radius = screenWidth * 0.2; // Adjust the factor as needed
 
     String displayText = _name.isNotEmpty ? _name[0] : '?';
-    return Hero(
-      tag: widget.editedContact?.hashCode ?? 0,
-      // tag: widget.editedContact?.hashCode,
-      child: GestureDetector(
-        onTap: _onContactPictureTapped,
-        child: CircleAvatar(
-          radius: radius,
-          child: _buildCircleAvatarContent(displayText, radius),
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Hero(
+          tag: widget.editedContact?.hashCode ?? 0,
+          child: GestureDetector(
+            onTap: _onContactPictureTapped,
+            child: CircleAvatar(
+              radius: radius,
+              backgroundImage: _contactImageFile != null ? FileImage(_contactImageFile!) : null,
+              child: _contactImageFile == null ? _buildCircleAvatarContent(displayText, radius) : null,
+            ),
+          ),
         ),
-      ),
+        IconButton(
+          icon: Icon(Icons.camera_alt, color: Colors.blue),
+          onPressed: _onContactPictureTapped,
+        ),
+      ],
     );
   }
 
   Widget _buildCircleAvatarContent(String displayText, double radius) {
-    if(isEditMode){
-      if(_contactImageFile == null) {
-          return Text(
-          displayText,
-          style: TextStyle(fontSize: radius),
-        );
-      }
-      else {
-        return Image.file(_contactImageFile);
-      }
-    }
-    else {
-      return Icon(Icons.person, size: radius,);
-    }
+    return isEditMode && _contactImageFile == null
+        ? Text(
+            displayText,
+            style: TextStyle(fontSize: radius),
+          )
+        : Icon(
+            Icons.person,
+            size: radius,
+          );
   }
 
   void _onContactPictureTapped() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _contactImageFile = pickedFile as File;
-    });
 
-    // if (pickedFile != null) {
-    //   setState(() { 
-    //     _photo = pickedFile.path;
-    //   });
-    // }
+    if (pickedFile != null) {
+      setState(() {
+        _contactImageFile = File(pickedFile.path);
+      });
+    }
   }
 
   void _onSaveButtonPressed() {
