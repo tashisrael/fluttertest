@@ -42,7 +42,7 @@ class _ContactFormState extends State<ContactForm> {
     }
   }
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -161,7 +161,7 @@ class _ContactFormState extends State<ContactForm> {
   void _onContactPictureTapped() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
+ 
     if (pickedFile != null) {
       setState(() {
         _contactImageFile = File(pickedFile.path);
