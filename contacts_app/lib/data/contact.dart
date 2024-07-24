@@ -3,6 +3,7 @@ class Contact{
   String email;
   String phoneNumber;
   bool isFavorite;
+  String? imagePath;
 
   //constructor with optional named parameters
   Contact({
@@ -10,5 +11,6 @@ class Contact{
     required this.email,
     required this.phoneNumber,
     this.isFavorite = false,
+    this.imagePath,
   });
 }

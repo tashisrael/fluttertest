@@ -37,7 +37,7 @@ class _ContactFormState extends State<ContactForm> {
     _phoneNumber = widget.editedContact?.phoneNumber ?? '';
   }
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -123,30 +123,21 @@ class _ContactFormState extends State<ContactForm> {
   }
 
   Widget _buildContactPicture() {
-     final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final double radius = screenWidth * 0.2; // Adjust the factor as needed
 
     String displayText = _name.isNotEmpty ? _name[0] : '?';
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Hero(
-          tag: widget.editedContact?.hashCode ?? 0,
-          child: GestureDetector(
-            onTap: _onContactPictureTapped,
-            child: CircleAvatar(
-              radius: radius,
-              backgroundImage: _contactImageFile != null ? FileImage(_contactImageFile!) : null,
-              child: _contactImageFile == null ? _buildCircleAvatarContent(displayText, radius) : null,
-            ),
-          ),
+    return Hero(
+      tag: widget.editedContact?.hashCode ?? 0,
+      child: GestureDetector(
+        onTap: _onContactPictureTapped,
+        child: CircleAvatar(
+          radius: radius,
+          backgroundImage: _contactImageFile != null ? FileImage(_contactImageFile!) : null,
+          child: _contactImageFile == null ? _buildCircleAvatarContent(displayText, radius) : null,
         ),
-        IconButton(
-          icon: Icon(Icons.camera_alt, color: Colors.blue),
-          onPressed: _onContactPictureTapped,
-        ),
-      ],
+      ),
     );
   }
 
