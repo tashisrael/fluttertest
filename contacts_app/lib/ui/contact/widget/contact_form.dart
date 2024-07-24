@@ -25,6 +25,7 @@ class _ContactFormState extends State<ContactForm> {
   late String _name;
   late String _email;
   late String _phoneNumber;
+  String? _contactImagePath;
   File? _contactImageFile;
 
   bool get isEditMode => widget.editedContact != null;
@@ -35,6 +36,10 @@ class _ContactFormState extends State<ContactForm> {
     _name = widget.editedContact?.name ?? '';
     _email = widget.editedContact?.email ?? '';
     _phoneNumber = widget.editedContact?.phoneNumber ?? '';
+    _contactImagePath = widget.editedContact?.imagePath;
+    if (_contactImagePath != null) {
+      _contactImageFile = File(_contactImagePath!);
+    }
   }
 
   @override 
@@ -160,6 +165,7 @@ class _ContactFormState extends State<ContactForm> {
     if (pickedFile != null) {
       setState(() {
         _contactImageFile = File(pickedFile.path);
+        _contactImagePath = pickedFile.path; // Store the path
       });
     }
   }
@@ -172,6 +178,7 @@ class _ContactFormState extends State<ContactForm> {
         email: _email,
         phoneNumber: _phoneNumber,
         isFavorite: widget.editedContact?.isFavorite ?? false,
+        imagePath: _contactImagePath, // Save the image path
       );
 
       if (isEditMode) {
